@@ -54,7 +54,12 @@ cell-description:
       charge: 2
       MW: 45.881
     A_0: m.pi*0.009**2
-
+    Solubility:
+      C_Li_sat:  0.1 #mol m-3 // saturated concentration of LiO2 //Yin (2017)
+      C_LiO2_sat:  0.1 #mol m-3 // saturated concentration of 
+    Gamma_surf: 7.7E-2 #J m-2 //  surface energy of the newly formed crystal phase// Danner (2019) - should be replaced for LiS system
+    contact-angle: 30 # degrees// Contact angle // Danner (2019) - should be replaced for LiS system
+    DLi:  1.2E-9 #m2 -s-1 // diffusion ceofficient // Yin (2017)
 
 # Simulation parameters:
 parameters:
@@ -137,7 +142,7 @@ phases:
 - name: electrolyte
   thermo: ideal-condensed
   elements: [Li, P, F, C, H, O, E]
-  species: ['C10H22O5[elyt]', 'Li+[elyt]', 'TFSI-[elyt]', O2(e), LiO2]
+  species: ['C10H22O5[elyt]', 'Li+[elyt]', 'TFSI-[elyt]', O2(e), LiO2[elyt]]
   state:
     X: {'C10H22O5[elyt]': 0.85464, 'TFSI-[elyt]': 0.07268,
       'PF6-[elyt]': 0.07268, 'O2(e)': 0.0, 'LiO2': 0.0} 
@@ -392,6 +397,8 @@ air-electrolyte-reactions:
 
 """Citations"""
 #Chen, J.; et al., ACS Omega, vol. 4, no. 20708-20714, 2019, DOI: 10.1021/acsomega.9b02941.
+
+# Danner, T. and A. Latz, 2019, 10.1016/j.electacta.2019.134719
 
 #Haynes, W.M.; CRC handbook of chemistry and physics, 2016, 97th Edition / Boca Raton, Florida: CRC Press.
 

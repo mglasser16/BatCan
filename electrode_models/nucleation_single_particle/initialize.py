@@ -47,6 +47,12 @@ def initialize(input_file, inputs, sep_inputs, counter_inputs, electrode_name,
         dy = inputs['thickness']
         dyInv = 1/dy
         buckets = inputs['buckets']
+        c_li_sat = inputs['Solubility']['C_Li_sat']
+        c_liO2_sat = inputs['Solubility']['C_LiO2_sat']
+        gamma_surf = inputs['gamma_surf']
+        theta = inputs['contact-angle']*m.pi/180
+        phi = (2+m.cos(theta))*(1-m.cos(theta))**2/4  # - // contact angle correction factor
+        D_LiO2 = inputs['D_LiO2']
 
         # Phase volume fractions
         eps_solid = inputs['eps_solid']
@@ -81,6 +87,7 @@ def initialize(input_file, inputs, sep_inputs, counter_inputs, electrode_name,
         # potential, electrode composition (n_species), electrolyte composition 
         # (n_species)
         radius = np.linspace(inputs['Minrad'], inputs['Maxrad'], buckets)
+        bin_width = radius[2]-radius[1]
         nVars = 3 + elyte_obj.n_species + buckets
 
         # Load the residual function and other required functions and store 
