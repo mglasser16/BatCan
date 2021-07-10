@@ -46,7 +46,7 @@ def initialize(input_file, inputs, sep_inputs, counter_inputs, electrode_name,
         # Electrode thickness and inverse thickness:
         dy = inputs['thickness']
         dyInv = 1/dy
-        buckets = inputs['buckets']
+        n_bins = inputs['n-bins']
         c_li_sat = inputs['Solubility']['C_Li_sat']
         c_liO2_sat = inputs['Solubility']['C_LiO2_sat']
         gamma_surf = inputs['gamma_surf']
@@ -84,11 +84,11 @@ def initialize(input_file, inputs, sep_inputs, counter_inputs, electrode_name,
         # bulk_obj.X = X_o
         
         # Number of state variables: electrode potential, electrolyte 
-        # potential, electrode composition (n_species), electrolyte composition 
+        # potential, electrolyte composition, and the number of bins.
         # (n_species)
-        radius = np.linspace(inputs['Minrad'], inputs['Maxrad'], buckets)
+        radius = np.linspace(inputs['Minrad'], inputs['Maxrad'], n_bins + 1)
         bin_width = radius[2]-radius[1]
-        nVars = 3 + elyte_obj.n_species + buckets
+        nVars = 3 + elyte_obj.n_species + n_bins + 1
 
         # Load the residual function and other required functions and store 
         # them as methods of this class:
@@ -116,7 +116,7 @@ def initialize(input_file, inputs, sep_inputs, counter_inputs, electrode_name,
     electrode.SVptr['Area'] = np.arange([3])
     electrode.SVptr['C_k_elyte'] = np.arange(3, 3 + electrode.elyte_obj.n_species)
     electrode.SVptr['Histogram'] =  (np.arange(3 + electrode.elyte_obj.n_species, 3 +  
-        electrode.elyte_obj.n_species + electrode.buckets))
+        electrode.elyte_obj.n_species + (electrode.n_bins +1)))
 
     # A pointer to where the SV varaibles for this electrode are, within the 
     # overall solution vector for the entire problem:

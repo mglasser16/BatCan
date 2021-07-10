@@ -41,16 +41,16 @@ cell-description:
     catalyst-iphase: 'catalyst_surf'
     product-phase: 'li-oxide'
     mobile-ion:  'Li+[elyt]' # Species name for Li+ in elyte.
-    thickness: 50e-6 # anode thickness, m
-    r_p: 6e-6 # Particle radius, m
+    thickness: 50e-6 # cathode thickness, m
+    r_p: 6e-6 # carbon Particle radius, m
     phi_0: 2.95 # Initial electric potential, V
     eps_solid: 0.65 # Solid phase volume fraction, -
     C_dl: 6e3 #F/m2
     Minrad: 1e-10 #m
     Maxrad: 1e-6 #m
-    buckets: 200 #number
+    n-bins: 200 #number
     stored-species: # Details on the stored species. Used for capacity calc.
-      name: Li[metal]
+      name: Li2O2[cathode]
       charge: 2
       MW: 45.881
     A_0: m.pi*0.009**2
@@ -109,9 +109,6 @@ description: |-
   adsorbed species)
 
   Builds on prior code development (LeBar, 2019)
-generator: cti2yaml
-cantera-version: 2.5.0
-date: Wed, 11 Dec 2019 16:59:07 -0500
 input-files: [lithium_ion_battery.cti]
 
 phases:
@@ -142,10 +139,10 @@ phases:
 - name: electrolyte
   thermo: ideal-condensed
   elements: [Li, P, F, C, H, O, E]
-  species: ['C10H22O5[elyt]', 'Li+[elyt]', 'TFSI-[elyt]', O2(e), LiO2[elyt]]
+  species: ['C10H22O5[elyt]', 'Li+[elyt]', 'TFSI-[elyt]', O2[elyt], LiO2[elyt]]
   state:
     X: {'C10H22O5[elyt]': 0.85464, 'TFSI-[elyt]': 0.07268,
-      'PF6-[elyt]': 0.07268, 'O2(e)': 0.0, 'LiO2': 0.0} 
+      'PF6-[elyt]': 0.07268, 'O2[elyt]': 1e-6, 'LiO2[elyt]': 1e-6} 
   standard-concentration-basis: unity
   reactions: [electrolyte-reactions]
 
@@ -301,7 +298,7 @@ species:
     Molar enthalpy and entropy set to zero (dummy entries as this species does
     not participate in chemical reactions)
 
-- name: O2(e)
+- name: O2[elyt]
   composition: {O: 2}
   thermo: 
     model: constant-cp
@@ -381,7 +378,7 @@ lithium_electrolyte-reactions:
   rate-constant: {A: 6.0e+09, b: 0.0, Ea: 0.0}
   beta: 0.5
 
-electrolyte-reactions:
+cathode-surf-reactions:
 - equation: Li+[elyt] + O2(e) + electron <=> LiO2[elyte]  # Reaction 2
   id: cathode_reaction
   rate-constant: {A: 5.629e+11, b: 0.0, Ea: 58.0 kJ/mol} #need a new reaction rate
