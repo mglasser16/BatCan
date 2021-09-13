@@ -25,12 +25,12 @@ def residual(SV, SVdot, self, sep, counter, params):
     
     # Initialize the residual:
     resid = np.zeros((self.nVars,))
-    RbarT= cantera.gas_constant*self.elyte_obj.T
+    RbarT= ct.gas_constant*self.elyte_obj.T
     # Save local copies of the solution vectors, pointers for this electrode:
     SVptr = self.SVptr
     SV_loc = SV[SVptr['residual']] # locates the SVptr in the entire solution vector.
     SVdot_loc = SVdot[SVptr['residual']] #is this the zero-ed matrix?
-    Dr_dt = numpy.zeros_like(SV['Histogram'])
+    Dr_dt = np.zeros_like(SV['Histogram'])
     # Read the electrode and electrolyte electric potential:
     phi_ed = SV_loc[SVptr['phi_ed']]
     phi_elyte = phi_ed + SV_loc[SVptr['phi_dl']]
