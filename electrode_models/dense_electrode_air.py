@@ -50,6 +50,7 @@ class electrode():
 
         # Interfacial surface area, per unit geometric area.
         self.A_surf_ratio = inputs['A_surf_ratio']
+        self.air_frac = inputs['air_frac']
 
         # Inverse of the double layer capacitance, per unit interface area:
         self.C_dl_Inv = 1/inputs['C_dl']
@@ -209,7 +210,8 @@ class electrode():
         sdot_electrolyte[self.index_Li] -= i_dl / ct.faraday
         dCk_elyte_dt = \
             (sdot_electrolyte * self.A_surf_ratio
-            + self.i_ext_flag * N_k_sep +sdot_elyte_air) / self.dy_elyte
+            + self.i_ext_flag * N_k_sep + sdot_elyte_air*self.air_frac) / self.dy_elyte
+        #FIX I think sdot_electrolyte should also be scaled by (1-self.air_frac), no?
         resid[SVptr['C_k_elyte']] = SVdot_loc[SVptr['C_k_elyte']] - dCk_elyte_dt
 
         return resid

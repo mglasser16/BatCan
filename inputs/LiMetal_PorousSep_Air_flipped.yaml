@@ -24,6 +24,7 @@ cell-description:
     A_surf_ratio: 1.0 # Interface area per unit geometric area
     C_dl: 6e-5 #F/m2
     dy_elyte: 2e-6
+    air_frac: 0.80
   separator:
     class: 'porous_separator'
     thickness: 20e-6  # separator thickness, m
