@@ -47,7 +47,7 @@ cell-description:
           D_k: 2e-13 # can't find (assume low?)
   cathode:
     class: 'air_electrode'
-    n-points: 5
+    n-points: 15
     gas-phase: 'oxygen'
     elyte-iphase: 'air-elyte-interface'
     electrolyte-phase: 'electrolyte' # Cantera phase name
@@ -94,7 +94,7 @@ parameters:
       outputs:
         show-plots: True # Show the plots and save them (True), or just save
                          # them (False)?
-        savename: 'CPCN04' # Folder label for output files.
+        savename: 'CP04' # Folder label for output files.
     - type: 'CC_cycle' # Constant current cycling
       # Specify only one of i_ext or C-rate. The other should be null:
       i_ext: 0.0005 A/cm2 #0.01 A/cm2 # input current density, format: XX units. Units are 'current/area', with no carat for exponents (e.g. A/cm2)
@@ -110,7 +110,7 @@ parameters:
       outputs:
         show-plots: True # Show the plots and save them (True), or just save
                          # them (False)?
-        savename: 'CPCN05' # Folder label for output files.
+        savename: 'CP05' # Folder label for output files.
     - type: 'CC_cycle' # Constant current cycling
       # Specify only one of i_ext or C-rate. The other should be null:
       i_ext: 0.0006 A/cm2 #0.01 A/cm2 # input current density, format: XX units. Units are 'current/area', with no carat for exponents (e.g. A/cm2)
@@ -126,7 +126,7 @@ parameters:
       outputs:
         show-plots: True # Show the plots and save them (True), or just save
                          # them (False)?
-        savename: 'CPCN06' # Folder label for output files.
+        savename: 'CP06' # Folder label for output files.
 
 # Cantera inputs:
 description: |-
@@ -399,7 +399,7 @@ cathode-surf-reactions:
 air-electrolyte-reactions:
 - equation: O2(g) <=> O2(e)  # Reaction 2
   id: cathode_gas_reaction
-  rate-constant: {A: 5.95, b: 0.0, Ea: 0 kJ/mol}
+  rate-constant: {A: 5.95e+4, b: 0.0, Ea: 0 kJ/mol}
   exchange-current-density-formulation: true
   beta: 0.5
 

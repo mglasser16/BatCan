@@ -4,7 +4,7 @@ air-electrolyte-reactions:
   exchange-current-density-formulation: true
   id: cathode_gas_reaction
   rate-constant:
-    A: 5.95
+    A: 59.5
     Ea: 0 kJ/mol
     b: 0.0
 cantera-version: 2.5.0
@@ -14,7 +14,7 @@ cathode-surf-reactions:
   exchange-current-density-formulation: true
   id: cathode_reaction
   rate-constant:
-    A: 6879000.0
+    A: 84999.75338785302
     Ea: 58.0 kJ/mol
     b: 0.0
 cell-description:
@@ -64,7 +64,7 @@ cell-description:
     class: porous_separator
     electrolyte-phase: electrolyte
     eps_electrolyte: 0.65
-    n_points: 15
+    n_points: 5
     phi_0: 2.91
     sigma_io: 0.272
     thickness: 0.00026
@@ -72,7 +72,7 @@ cell-description:
       diffusion-coefficients:
       - D_k: 1.11e-10
         species: C10H22O5[elyt]
-      - D_k: 6.98e-11
+      - D_k: -0.9794296395337304
         species: Li+[elyt]
       - D_k: 8.79e-11
         species: ClO4-[elyt]
@@ -159,10 +159,10 @@ parameters:
     i_ext: 0.0004 A/cm2
     n_cycles: 1
     outputs:
-      savename: CPCN04
+      savename: CP04
       show-plots: true
-    phi-cutoff-lower: 2.0
-    phi-cutoff-upper: 4.8
+    phi-cutoff-lower: 1.8
+    phi-cutoff-upper: 5.3
     species-cutoff: 1e-12
     type: CC_cycle
   - C-rate: null
@@ -173,10 +173,10 @@ parameters:
     i_ext: 0.0005 A/cm2
     n_cycles: 1
     outputs:
-      savename: CPCN05
-      show-plots: false
-    phi-cutoff-lower: 2.0
-    phi-cutoff-upper: 4.8
+      savename: CP05
+      show-plots: true
+    phi-cutoff-lower: 1.8
+    phi-cutoff-upper: 5.3
     species-cutoff: 1e-12
     type: CC_cycle
   - C-rate: null
@@ -187,10 +187,10 @@ parameters:
     i_ext: 0.0006 A/cm2
     n_cycles: 1
     outputs:
-      savename: CPCN06
-      show-plots: false
-    phi-cutoff-lower: 2.0
-    phi-cutoff-upper: 4.8
+      savename: CP06
+      show-plots: true
+    phi-cutoff-lower: 1.8
+    phi-cutoff-upper: 5.3
     species-cutoff: 1e-12
     type: CC_cycle
 phases:
@@ -241,7 +241,7 @@ phases:
       ClO4-[elyt]: 0.04961
       Li+[elyt]: 0.04961
       Li2O2[elyt]: 1E-9
-      O2(e): 0.000139
+      O2(e): 0.001339
   thermo: ideal-condensed
 - kinetics: surface
   name: air-elyte-interface
