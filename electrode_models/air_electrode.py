@@ -54,8 +54,9 @@ class electrode():
         self.index_Li_elyte = self.elyte_obj.species_index(inputs['mobile-ion'])
 
         # Phase volume fractions
-        eps_host = np.array([inputs['eps_host']])
-        eps_host = eps_host[0]
+        eps_host =inputs['eps_host']
+
+        # eps_host = eps_host[0]
 
         if len(eps_host) == 1:
             self.eps_host = np.repeat(eps_host[0], self.n_points)
@@ -64,7 +65,7 @@ class electrode():
         else:
             raise ValueError("Porosity must be either a single scalar, or"
                 " must match the discretization of the air electrode.")
-
+        print(self.eps_host)
         self.eps_product_init = inputs['eps_product']
         self.eps_elyte_init = 1. - self.eps_host - self.eps_product_init
 
